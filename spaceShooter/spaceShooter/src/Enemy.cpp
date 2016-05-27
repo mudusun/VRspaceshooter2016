@@ -140,7 +140,7 @@ void Enemy::privateUpdate()
 		x_ = glm::cos(float(i) / 150.0f);
 	}
 
-	matrix_ = glm::translate(matrix_, glm::vec3(x_, 0.0f, 0.15f));
+	matrix_ = glm::translate(matrix_, glm::vec3(x_, 0.0f, -0.50f));
 
 
 }

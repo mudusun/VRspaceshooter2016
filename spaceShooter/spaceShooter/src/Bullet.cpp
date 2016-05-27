@@ -38,6 +38,7 @@ void Bullet::privateInit()
     glVertex3f(translateVec_[0] - 0.1, translateVec_[1] - 0.1, translateVec_[2] );
     glEnd();
     glEndList();
+
 }
 
 void Bullet::privateRender()

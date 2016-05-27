@@ -22,7 +22,8 @@ void SpaceShip::privateInit()
 	particleImg_.reset(new ParticleGenerator(0, m));
 	this->addSubObject(particleImg_);
 
-	vertexArray_ = {
+	vertexArray_ = 
+	{
 		glm::vec3(-24, -6, 10), glm::vec3(-4, 0, 0), glm::vec3(0, 0, -32), glm::vec3(0, 4, 0),
 		glm::vec3(0, -4, 0), glm::vec3(4, 0, 0), glm::vec3(24, -6, 10)
 	};

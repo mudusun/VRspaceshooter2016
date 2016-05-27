@@ -1,0 +1,30 @@
+﻿  GameManager.cpp
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(62): warning C4018: '<': signed/unsigned mismatch
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(69): warning C4018: '<': signed/unsigned mismatch
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(76): warning C4018: '<': signed/unsigned mismatch
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(86): warning C4018: '<': signed/unsigned mismatch
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(105): warning C4018: '<': signed/unsigned mismatch
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(106): warning C4018: '<': signed/unsigned mismatch
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(124): warning C4101: 'i': unreferenced local variable
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(140): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(150): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(203): warning C4018: '<': signed/unsigned mismatch
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(230): warning C4018: '<': signed/unsigned mismatch
+c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(232): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\memory(901): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\memory(971): note: see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<int,int,float>(int &&,int &&,float &&)' being compiled
+          with
+          [
+              _Ty=Enemy
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\memory(971): note: see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<int,int,float>(int &&,int &&,float &&)' being compiled
+          with
+          [
+              _Ty=Enemy
+          ]
+  c:\users\hxu001\documents\visual studio 2015\projects\spaceshooter\spaceshooter\src\gamemanager.cpp(168): note: see reference to function template instantiation 'std::shared_ptr<Enemy> std::make_shared<Enemy,int,int,float>(int &&,int &&,float &&)' being compiled
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  BitmapText.cpp
+  main.cpp
+  spaceShooter.vcxproj -> C:\Users\hxu001\Documents\visual studio 2015\Projects\spaceShooter\Debug\spaceShooter.exe

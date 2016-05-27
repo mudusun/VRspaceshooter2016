@@ -24,8 +24,6 @@
 #include "Skybox.hpp"
 #include "Water.hpp"
 #include "SpaceObjects.hpp"
-#include "Lifebar.hpp"
-#include "LifebarEnemy.hpp"
 
 class GameManager : public SceneObject
 {

@@ -169,11 +169,6 @@ void BattleField::field1()
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex_2d[2]);
 
-	//GLenum err = glGetError();
-	//if (err != GL_NO_ERROR)
-	//	std::cout << "OpenGL error: " << gluErrorString(err) << std::endl;
-	//std::cout.flush();
-
 	glEnableClientState(GL_VERTEX_ARRAY);        // enable vertex arrays
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY); // enable texture arrays
 												 //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
@@ -229,10 +224,6 @@ void BattleField::field2()
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex_2d_2[2]);
 
-	//GLenum err = glGetError();
-	//if (err != GL_NO_ERROR)
-	//	std::cout << "OpenGL error: " << gluErrorString(err) << std::endl;
-	//std::cout.flush();
 
 	glEnableClientState(GL_VERTEX_ARRAY);        // enable vertex arrays
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY); // enable texture arrays

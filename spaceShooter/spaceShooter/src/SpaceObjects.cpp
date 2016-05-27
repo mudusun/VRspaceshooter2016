@@ -34,7 +34,7 @@ SpaceObjects::SpaceObjects(glm::vec3 speed, glm::vec3 position, float life,
 	this->id_ = id;
 	this->outOfBounds_ = false;
 }
-//weapon mode
+// bullet
 SpaceObjects::SpaceObjects(glm::vec3 speed, glm::vec3 position,
 	                       int size, int damage, int mode, glm::mat4 matrix, int id) 
 {

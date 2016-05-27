@@ -253,13 +253,13 @@ void GameManager::collSpaceShipBulletsVsEnemy()
 					else
 					{
 						enemyObj_[j]->reduceLife(spaceShipWeapon_->getDamage());
-						std::cout << "Life enemy " << enemyObj_[j]->getLife() << std::endl;
+						//std::cout << "Life enemy " << enemyObj_[j]->getLife() << std::endl;
 					}
 				}
 				else
 				{
 					enemyObj_[j]->reduceArmor(spaceShipWeapon_->getDamage());
-					std::cout << "Armor enemy " << enemyObj_[j]->getArmor() << std::endl;
+					//std::cout << "Armor enemy " << enemyObj_[j]->getArmor() << std::endl;
 				}
 				this->removeSubObject(bulletObj_[i]);
 				bulletObj_.erase(bulletObj_.begin() + i);

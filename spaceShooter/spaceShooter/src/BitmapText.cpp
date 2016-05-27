@@ -17,7 +17,7 @@ void BitmapText::drawBitmapText(const char *string, float x, float y)
 {
 	const char *c;
 	
-	glWindowPos2f(x,  y);
+	glWindowPos2f(x, y);
 
 	for (c = string; *c != '\0'; c++)
 	{

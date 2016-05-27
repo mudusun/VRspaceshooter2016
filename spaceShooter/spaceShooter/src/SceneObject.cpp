@@ -5,7 +5,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-// NB! Check matrix mult and scoped_ptr
+
 
 SceneObject::SceneObject()
 {

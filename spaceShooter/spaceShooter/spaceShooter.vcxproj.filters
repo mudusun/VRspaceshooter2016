@@ -60,13 +60,10 @@
     <ClCompile Include="src\Water.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\SpaceObjects.cpp">
+    <ClCompile Include="src\objloader.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lifebar.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\LifebarEnemy.cpp">
+    <ClCompile Include="src\Model.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,13 +113,10 @@
     <ClInclude Include="include\Water.hpp">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\SpaceObjects.hpp">
+    <ClInclude Include="include\objloader.hpp">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Lifebar.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LifebarEnemy.hpp">
+    <ClInclude Include="include\Model.hpp">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,13 +9,14 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-Enemy::Enemy(float life, int mode, float posX) 
+Enemy::Enemy(float life, Model * model, int mode, float posX)
 {
 	x_ = 0;
 	srand(time(0));
 	random_ = rand() % 40 - 20;
 	rand2_ = rand() % 20;
 
+	model_ = model;
 	this->mode_ = mode;
 
 	if (rand2_> 15) 
@@ -28,7 +29,7 @@ Enemy::Enemy(float life, int mode, float posX)
 		radius_ = 0.5;
 		life_ = 10;
 	}
-	translateVec_ = glm::vec3(posX, 0.0f, -500.0f);
+	translateVec_ = glm::vec3(posX, 0.0f, -1000.0f);
 
 	matrix_ = glm::translate(matrix_, translateVec_);
 
@@ -44,14 +45,12 @@ void Enemy::privateInit()
 	//normal
 	if (this->mode_ == 0) 
 	{
-		eShader_.initShaders("Shaders/red");
 		
 	}
 
 	//sinus
 	if (this->mode_ == 1) 
 	{
-		eShader_.initShaders("Shaders/phong");
 		
 	}
 	
@@ -59,9 +58,7 @@ void Enemy::privateInit()
 	if (this->mode_ == 2) 
 	{
 		
-		GLint texSampler;
-		texSampler = glGetUniformLocation(eShader_.getProg(), "enemy");
-		glUniform1i(texSampler, 0);
+		
 	}
 
 	list_id = glGenLists(1);   // list_idis an integer
@@ -77,50 +74,12 @@ void Enemy::privateInit()
 	glEnd();
 	glEndList();
 
-	//matrix_ = glm::translate(glm::mat4(), glm::vec3(0.0f, 10.0f, -500.0f));
-
-	
 
 }
 
 void Enemy::privateRender()
 { 
-	
-	eShader_.enable();
-	//normal
-	
-	if (this->mode_ == 0) 
-	{
-
-		glutSolidSphere(6.f, 20, 20);
-
-	}
-	//sin
-	if (this->mode_ == 1) 
-	{
-
-		glutSolidSphere(3.f, 20, 20);
-
-	}
-	//cos
-	else
-	{
-
-		glutSolidCube(6.f);
-
-
-	}
-	
-	eShader_.disable();
-
-  glColor3f(1.0f, 0.0f, 1.0f);  
-  
- 
-}
-
-void Enemy::privateUpdate()
-{
-	if (this->mode_ == 0) 
+	if (this->mode_ == 0)
 	{
 		//moves automatically
 		x_ = 0.f;
@@ -128,20 +87,29 @@ void Enemy::privateUpdate()
 
 	if (this->mode_ == 1)
 	{
-		static int i = 0; 
+		static int i = 0;
 		i++;
-		x_ = glm::sin(float(i) / 150.0f);
+		x_ = glm::sin(float(i) / 50.0f);
 	}
 
 	if (this->mode_ == 2)
 	{
 		static int i = 0;
 		i++;
-		x_ = glm::cos(float(i) / 150.0f);
+		x_ = glm::cos(float(i) / 100.0f);
 	}
 
-	matrix_ = glm::translate(matrix_, glm::vec3(x_, 0.0f, -0.50f));
+	matrix_ = glm::translate(matrix_, glm::vec3(x_, 0.0f, 10.0f));
 
+
+	model_->Render();
+  
+ 
+}
+
+void Enemy::privateUpdate()
+{
+	
 
 }
 

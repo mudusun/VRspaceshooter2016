@@ -4,7 +4,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 
-Bullet::Bullet(int mode, glm::mat4 spaceShipMatrix)
+Bullet::Bullet(int mode, glm::mat4 spaceShipMatrix, int type)
 {
   //radius_ = 0.2;
 	mode_ = mode;
@@ -12,12 +12,17 @@ Bullet::Bullet(int mode, glm::mat4 spaceShipMatrix)
 	if (mode_ == 0)
 	{
 		speed_ = 5.0f;
-		//matrix_ = glm::translate(glm::mat4(), glm::vec3(0.0f, 3.0f, 0.0f));
+	
 	}
 	if (mode_ == 1)
 	{
 		speed_ = 1.0f;
-		//matrix_ = glm::translate(glm::mat4(), glm::vec3(0.0f, 5.0f, 0.0f));
+		
+	}
+
+	if (type == 1)//spaceship
+	{
+		speed_ *= -1.0;
 	}
 }
 
@@ -39,37 +44,23 @@ void Bullet::privateInit()
     glEnd();
     glEndList();
 
+	
 }
 
 void Bullet::privateRender()
 {
-    /*glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    GLfloat lightpos[] = {10, 10, 10, 1.0};
-    GLfloat mat_ambient[] = {0.5,0.5,0.0};
-    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-    glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
 
-    matrix_ = glm::translate(matrix_, direction_);
-    glCallList(list_id);
-
-	translateVec_ += direction_;
-
-    glDisable(GL_LIGHT0);
-    glDisable(GL_LIGHTING);*/
-
-	//laser
-	if (this->mode_ == 0) 
+	if (this->mode_ == 0)   //bullet from enemy
 	{
 		glBegin(GL_QUADS);
 		glVertex3f(1.f, 0.f, 0.f);
-		glVertex3f(1.f, 0.f, -300.f);
-		glVertex3f(-1.f, 0.f, -300.f);
+		glVertex3f(1.f, 0.f, -1.f);
+		glVertex3f(-1.f, 0.f, -1.f);
 		glVertex3f(-1.f, 0.f, 0.f);
 		glEnd();
 	}
-	//rocket
-	if (this->mode_ == 1) 
+	
+	if (this->mode_ == 1)     //bullet from spaceship
 	{
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
@@ -78,7 +69,7 @@ void Bullet::privateRender()
 		glShadeModel(GL_SMOOTH);
 		glColor3f(1.0f, 0.0f, 0.0f);
 		int radius = 2;
-		int slices = 100;
+		int slices = 50;
 		GLint stacks = 100;
 		glutSolidSphere(radius, slices, stacks);
 		glDisable(GL_LIGHTING);
@@ -88,7 +79,7 @@ void Bullet::privateRender()
 
 void Bullet::privateUpdate()
 {
-	matrix_ = glm::translate(matrix_, glm::vec3(0.0f, 0.25f, -speed_));
+	matrix_ = glm::translate(matrix_, glm::vec3(0.0f, 0.0f, speed_));
 }
 
 void Bullet::SetPosition(glm::vec3 pos)
@@ -113,6 +104,7 @@ glm::vec3 Bullet::TranslateVec()
 {
     return translateVec_;
 }
+
 
 
 

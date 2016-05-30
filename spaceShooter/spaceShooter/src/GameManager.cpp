@@ -73,6 +73,8 @@ void GameManager::privateRender()
 				bullets_.erase(bullets_.begin() + i);
 			}
 
+
+	 //collision between enemies and spaceship
 		for (int i = 0; i < enemies_.size(); i++)
 			if (Collision(enemies_[i]->Radius(), spaceship_->Radius(), enemies_[i]->TranslateVec(), spaceship_->TranslateVec()))
 			{
@@ -83,6 +85,7 @@ void GameManager::privateRender()
 				this->removeSubObject(spaceship_);
 			}
 
+	 // //collision between bullets and spaceship
 		for (int i = 0; i < bullets_.size(); i++)
 			if (Collision(bullets_[i]->Radius(), spaceship_->Radius(), bullets_[i]->TranslateVec(), spaceship_->TranslateVec()))
 			{
@@ -102,6 +105,7 @@ void GameManager::privateRender()
 				}
 			}
 
+			////collision between enemies's bullet and enemies
 		for (int i = 0; i < enemies_.size(); i++)
 			for (int j = 0; j < bulletsPlayer_.size(); j++)
 				if (Collision(bulletsPlayer_[j]->Radius(), enemies_[i]->Radius(), bulletsPlayer_[j]->TranslateVec(), enemies_[i]->TranslateVec()))
@@ -123,6 +127,8 @@ void GameManager::privateRender()
 	}
 	catch (int i )
 	{}
+
+	
 	}
 
 void GameManager::privateUpdate()
@@ -148,6 +154,8 @@ void GameManager::privateUpdate()
 	}
 	fpsCount_ = std::to_string(counter_2);
 	bitmap_->drawBitmapText(fpsCount_.c_str(), glutGet(GLUT_WINDOW_HEIGHT) - 200, glutGet(GLUT_WINDOW_WIDTH) - 200);
+
+
 }
 
 std::shared_ptr<Camera> GameManager::getCam()
@@ -163,9 +171,9 @@ std::shared_ptr<SpaceShip> GameManager::getShip()
 void GameManager::addEnemy()
 {
 	// Normal enemy
-	for (int i = -2; i < 2; i++)
+	for (int i = -4; i < -1; i++)
 	{
-		auto enemy = std::make_shared<Enemy>(100, 0, float(i) * 80.f);
+		auto enemy = std::make_shared<Enemy>(100, loader_.getEnemyModel(), 0, float(i) * 40.f);
 		this->addSubObject(enemy);
 
 		enemies_.push_back(enemy);
@@ -175,9 +183,9 @@ void GameManager::addEnemy()
 	}
 	
 	// Sin enemy
-	for (int i = -4; i < 4; i++)
+	for (int i = -1; i < 1; i++)
 	{
-		auto enemy1 = std::make_shared<Enemy>(100, 1, float(i) * 20.f);
+		auto enemy1 = std::make_shared<Enemy>(100, loader_.getBossModel(), 1, float(i) * 30.f);
 		this->addSubObject(enemy1);
 
 		enemies_.push_back(enemy1);
@@ -185,9 +193,9 @@ void GameManager::addEnemy()
 
 	}
 	// Cos enemy
-	for (int i = -3; i < 3; i++)
+	for (int i = 1; i < 4; i++)
 	{
-		enemy_ = std::make_shared<Enemy>(100, 2, float(i) * 50.f);
+		enemy_ = std::make_shared<Enemy>(100, loader_.getEnemyModel(), 2, float(i) * 40.f);
 		this->addSubObject(enemy_);
 
 		enemies_.push_back(enemy_);
@@ -203,7 +211,7 @@ void GameManager::addBullet()
 	for (int i=0; i < enemies_.size(); i++) {
 		std::shared_ptr<Bullet> bullet_;
 		glm::vec3 dir(0, 0, 0.1);
-		bullet_.reset(new Bullet(0, getMatrix()));
+		bullet_.reset(new Bullet(0, enemies_[i]->getMatrix(), 0));
 		bullet_->SetPosition(enemies_[i]->TranslateVec());
 		bullet_->SetDirection(dir);
 		this->addSubObject(bullet_);
@@ -211,11 +219,11 @@ void GameManager::addBullet()
 	}
 }
 
-void GameManager::addBulletPlayer()
+void GameManager::addBulletPlayer()   //bullet from enemy
 {
 	std::shared_ptr<Bullet> bullet_;
 	glm::vec3 dir(0, 0, -1);
-	bullet_.reset(new Bullet(1, getMatrix()));
+	bullet_.reset(new Bullet(1, spaceship_->getMatrix(), 1));
 	bullet_->SetPosition(spaceship_->TranslateVec());
 	bullet_->SetDirection(dir);
 	this->addSubObject(bullet_);
@@ -223,86 +231,6 @@ void GameManager::addBulletPlayer()
 }
 
 
-
-// Collision between Spaceship bullets and enemy
-void GameManager::collSpaceShipBulletsVsEnemy()
-{
-	for (int i = 0; i < bulletObj_.size(); i++)
-	{
-		for (int j = 0; j < enemyObj_.size(); j++)
-		{
-			if (findCollision(bulletObj_[i], enemyObj_[j]))
-			{
-
-				auto currentEnemy = enemyObj_[j];
-
-				if (enemyObj_[j]->getArmor() <= 0)
-				{
-					if (enemyObj_[j]->getLife() <= 0)
-					{
-						// Enemy dead. FPS drop, because the particles is generated every time
-						glm::mat4 m = enemyObj_[j]->getMatrix();
-						explosion_.reset(new ParticleGenerator(0, m));
-						this->addSubObject(explosion_);
-
-						this->removeSubObject(enemyObj_[j]);
-						enemyObj_.erase(enemyObj_.begin() + j);
-						j--;
-
-					}
-					else
-					{
-						enemyObj_[j]->reduceLife(spaceShipWeapon_->getDamage());
-						//std::cout << "Life enemy " << enemyObj_[j]->getLife() << std::endl;
-					}
-				}
-				else
-				{
-					enemyObj_[j]->reduceArmor(spaceShipWeapon_->getDamage());
-					//std::cout << "Armor enemy " << enemyObj_[j]->getArmor() << std::endl;
-				}
-				this->removeSubObject(bulletObj_[i]);
-				bulletObj_.erase(bulletObj_.begin() + i);
-				i--;
-				break;
-			}
-		}
-	}
-}
-
-bool GameManager::findCollision(std::shared_ptr<SpaceObjects> object1, std::shared_ptr<SpaceObjects> object2)
-{
-	glm::vec3 objectPos1 = object1->getPosition();
-	glm::vec3 objectPos2 = object2->getPosition();
-
-	glm::vec3 objectSpeed1 = object1->getStep();
-	glm::vec3 objectSpeed2 = object2->getStep();
-
-	int objectRadius1 = object1->getSize();
-	int objectRadius2 = object2->getSize();
-
-	glm::vec3 dp = glm::vec3(objectPos1.x - objectPos2.x, 0.0f, objectPos1.z - objectPos2.z);
-	glm::vec3 ds = (objectSpeed1 - objectSpeed2);
-
-	int objectRadius = (objectRadius1 + objectRadius2);
-
-	float a = glm::dot(ds, ds);
-	float b = glm::dot(ds, dp)*2.0f;
-	float c = glm::dot(dp, dp) - objectRadius * objectRadius;
-	float var = (b*b) - 4 * a*c;
-
-	if (var > 0)
-	{
-		auto x = (-b - std::sqrt(var)) / (2 * a);
-
-	 if (x > 0 && x <= 1)
-		{
-			return true;
-		}
-	}
-	
-	return false;
-}
 
 bool GameManager::Collision(float radius_1, float radius_2, glm::vec3 translateVec1, glm::vec3 translateVec2)
 {

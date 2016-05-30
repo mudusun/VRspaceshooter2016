@@ -10,6 +10,8 @@
 #include <iostream>
 #include <memory>
 #include <sstream>
+#include <algorithm>
+#include <GL/freeglut.h>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -23,7 +25,7 @@
 #include "BitmapText.hpp"
 #include "Skybox.hpp"
 #include "Water.hpp"
-#include "SpaceObjects.hpp"
+#include "objloader.hpp"
 
 class GameManager : public SceneObject
 {
@@ -37,8 +39,6 @@ class GameManager : public SceneObject
 	void addEnemy();
 	void addBullet();
 	void addBulletPlayer();
-	void collSpaceShipBulletsVsEnemy();
-	bool findCollision(std::shared_ptr<SpaceObjects> object1, std::shared_ptr<SpaceObjects> object2);
 	bool GameManager::Collision(float radius_1, float radius_2, glm::vec3 translateVec1, glm::vec3 translateVec2);
 
   protected:
@@ -65,11 +65,6 @@ class GameManager : public SceneObject
 	std::vector< std::shared_ptr<Bullet> > bullets_;
 	std::vector< std::shared_ptr<Bullet> > bulletsPlayer_;
 
-	std::shared_ptr<SpaceObjects> spaceShipWeapon_;
-	std::vector <std::shared_ptr<SpaceObjects>> enemyObj_;
-	std::vector <std::shared_ptr<SpaceObjects>> spaceShipObj_;
-	std::vector <std::shared_ptr<SpaceObjects>> bulletObj_;
-
 	std::shared_ptr<ParticleGenerator> explosion_;
 
 	std::shared_ptr<ParticleGenerator> particle_;
@@ -77,6 +72,8 @@ class GameManager : public SceneObject
 	float counter_1;
 	float counter_2;
 	std::string fpsCount_;
+
+	Objloader loader_;
 
 };
 

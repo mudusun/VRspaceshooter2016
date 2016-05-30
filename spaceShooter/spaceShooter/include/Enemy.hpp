@@ -8,11 +8,12 @@
 #include "glm/glm.hpp"
 #include "glm/gtx/transform.hpp"
 #include "Shader.hpp"
+#include "Model.hpp"
 
 class Enemy : public SceneObject
 {
 	public:
-		Enemy(float life, int mode, float posX);
+		Enemy(float life, Model* model, int mode, float posX);
 		~Enemy();
 		float Radius() const;
 		glm::vec3 TranslateVec() const;
@@ -41,6 +42,7 @@ class Enemy : public SceneObject
 	  int random_;
 	  int rand2_;
 	  float x_;
+	  Model*      model_;
 	  glm::vec3 translateVec_;
 	  int mode_;
 	  Shader eShader_;

@@ -9,7 +9,7 @@
 class Bullet : public SceneObject
 {
 public:
-    Bullet(int mode, glm::mat4 spaceShipMatrix);
+    Bullet(int mode, glm::mat4 spaceShipMatrix, int type);
     ~Bullet();
 
     void SetPosition(glm::vec3 pos);

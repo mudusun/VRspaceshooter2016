@@ -25,8 +25,6 @@ class BitmapText : public SceneObject
 
 	private:
 	  
-	
-    
-    
+
 };
 

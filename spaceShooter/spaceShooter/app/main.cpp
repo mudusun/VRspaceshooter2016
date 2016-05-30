@@ -248,7 +248,8 @@ void mouseMoved(int posX, int posY)
   }
 }
 
-void addEnemy(int i) {
+void addEnemy(int i)
+{
 	gm->addEnemy();
 	glutTimerFunc(2000, addEnemy, 0);
 }
